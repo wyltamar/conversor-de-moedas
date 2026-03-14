@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="pt_br">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100..900;1,100..900&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" href="./styles.css">
+    <title>DevClub - Currency Converter</title>
+</head>
+
+<body>
+
+    <!-- <img class="logo" src="./assets/logo2.gif" alt="logo-currency-converter"> -->
+
+    <main class="container">
+
+        <label >
+            Converter de
+            <select class="select-real">
+                <option>R$ Real Brasileiro</option>
+            </select>
+        </label>
+
+        <label >
+            Para
+            <select>
+                <option>US$ Dólar Americano</option>
+                <option>€$ Euro</option>
+            </select>
+        </label>
+
+        <label >
+            Valor
+            <input type="text" placeholder="$0.0">
+        </label>
+        <button>Converter</button>
+
+        <section class="currency-box">
+            <div class="brazil">
+                <img src="./assets/real.png" alt="bandeira-brasil" class="flags">
+                <p class="currency">Real</p>
+                <p class="currency-value">
+                    <R1>0,0</R1>
+                </p>
+            </div>
+
+            <img src="./assets/seta.png" alt="arrow" class="arrow">
+
+            <div class="usa">
+                <img src="./assets/dolar.png" alt="flag-eua" class="flags">
+                <p class="currency">Dólar Americano</p>
+                <p class="currency-value"><US1>0.0</US1></p>
+            </div>
+            
+        </section>
+
+    </main>
+
+</body>
+
+</html>

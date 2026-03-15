@@ -22,12 +22,19 @@ function checkCodeCurrency() {
     const select = document.querySelector(".select-currency")
     const codeCurrencyVerify = select.value
 
-    if (codeCurrencyVerify === "euro") codeCurrency = "EUR"
-
-    document.querySelector(".currency-name").textContent = "Euro"
-    document.querySelector(".change-flag").src = "./assets/euro.png"
-    document.querySelector(".change-flag").alt = "flag-euro"
-    document.querySelector(".currency-dolar").textContent = "€ 0.0"
+    if (codeCurrencyVerify === "euro") {
+        codeCurrency = "EUR"
+        document.querySelector(".currency-name").textContent = "Euro"
+        document.querySelector(".change-flag").src = "./assets/euro.png"
+        document.querySelector(".change-flag").alt = "flag-euro"
+        document.querySelector(".currency-dolar").textContent = "€ 0.0"
+    }else if (codeCurrencyVerify === "dolar") {
+        codeCurrency = "USD"
+        document.querySelector(".currency-name").textContent = "Dólar"
+        document.querySelector(".change-flag").src = "./assets/dolar.png"
+        document.querySelector(".change-flag").alt = "flag-dola"
+        document.querySelector(".currency-dolar").textContent = "US$ 0.0"
+    }
 
 }
 
@@ -43,7 +50,7 @@ function toConvert() {
         .then(data => {
             if (codeCurrency === "USD") {
                 currencyDolar.textContent = `US$ ${data.conversion_result.toFixed(2)}`
-            } else {
+            } else if (codeCurrency === "EUR") {
                 currencyDolar.textContent = `€ ${data.conversion_result.toFixed(2)}`
 
             }

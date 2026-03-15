@@ -10,11 +10,10 @@ body{
     background-size: cover;
     background-position: center;
     height: 100vh;   
-    overflow: hidden;
 }
 
 
-/* .logo{
+.logo{
     width: 110x;
     height: 110px;
     display: flex;
@@ -23,7 +22,7 @@ body{
     margin-top: 10px;
     margin-bottom: 10px;
     background: #EFEFEF
-} */
+}
 
 .flags{
     width: 44px;
@@ -33,7 +32,7 @@ body{
 
 
 .container{
-    width: 375px;
+    width: 360px;
     border-radius: 20px;
     padding: 40px 20px 21px;
     display: flex;
@@ -42,7 +41,6 @@ body{
     display: flex;
     flex-direction: column;
     margin-top: 6px;
-    
 }
 
 label{

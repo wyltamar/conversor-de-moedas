@@ -7,40 +7,57 @@
 [X] Fazer a conversão de real para dólar;
 [X] Colocar o valor em real informado pelo usuário no valor de real na tela;
 [X] Colocar no campo dólar o valor convertido;
-[ ] Formatar os valores para forma monetária;
-[ ] Implementar a conversão para Euro ao trocarmos o select;
+[X] Formatar os valores para forma monetária;
+[X] Implementar a conversão para Euro ao trocarmos o select;
+[X] Trocar bandeira ao mudar a moeda estrangeira
 
 */
 const buttonConverter = document.querySelector("button")
 const inputValue = document.querySelector("input")
 const currencyDolar = document.querySelector(".currency-dolar")
+let codeCurrency = "USD";
 
+function checkCodeCurrency(){
+    const select = document.querySelector(".select-currency")
+    const codeCurrencyVerify = select.value
+  
+    if(codeCurrencyVerify === "euro") codeCurrency = "EUR"
+
+}
 
 
 function toConvert() { 
 
     const API_KEY = "e0336a24fd5b3577e2ddf631"
-    const url = `https://v6.exchangerate-api.com/v6/${API_KEY}/pair/BRL/USD/${inputValue.value}`;
+    const url = `https://v6.exchangerate-api.com/v6/${API_KEY}/pair/BRL/${codeCurrency}/${inputValue.value}`;
 
     fetch(url)
         .then(response => response.json())
         .then(data => {
-            console.log(`Resultado: ${data.conversion_result}`);
-            currencyDolar.textContent = `US$ ${data.conversion_result.toFixed(2)}`            
-
+            if(codeCurrency === "USD"){
+                currencyDolar.textContent = `US$ ${data.conversion_result.toFixed(2)}`
+            }else{
+                currencyDolar.textContent = `€ ${data.conversion_result.toFixed(2)}`
+                document.querySelector(".currency-name").textContent = "Euro"
+                document.querySelector(".change-flag").src = "./assets/euro.png"
+                document.querySelector(".change-flag").alt = "flag-euro"
+            }
+            console.log(data.conversion_result.toFixed(2))
         });
 
     toInsrtValueInReal()
-    
-    
+    checkCodeCurrency()
     
 }
 
 buttonConverter.addEventListener("click", toConvert)
 
 function toInsrtValueInReal(){
-    document.querySelector(".currency-real").textContent = `R$ ${inputValue.value}`
+    let stringValue = inputValue.value
+    let numberValue = parseFloat(stringValue)
+    document.querySelector(".currency-real").textContent = `R$ ${numberValue.toFixed(2)}`  
 }
+
 
 
 

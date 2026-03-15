@@ -15,18 +15,25 @@
 const buttonConverter = document.querySelector("button")
 const inputValue = document.querySelector("input")
 const currencyDolar = document.querySelector(".currency-dolar")
+const selectCurrency = document.querySelector(".select-currency")
 let codeCurrency = "USD";
 
-function checkCodeCurrency(){
+function checkCodeCurrency() {
     const select = document.querySelector(".select-currency")
     const codeCurrencyVerify = select.value
-  
-    if(codeCurrencyVerify === "euro") codeCurrency = "EUR"
+
+    if (codeCurrencyVerify === "euro") codeCurrency = "EUR"
+
+    document.querySelector(".currency-name").textContent = "Euro"
+    document.querySelector(".change-flag").src = "./assets/euro.png"
+    document.querySelector(".change-flag").alt = "flag-euro"
+    document.querySelector(".currency-dolar").textContent = "€ 0.0"
 
 }
 
+selectCurrency.addEventListener("change", checkCodeCurrency);
 
-function toConvert() { 
+function toConvert() {
 
     const API_KEY = "e0336a24fd5b3577e2ddf631"
     const url = `https://v6.exchangerate-api.com/v6/${API_KEY}/pair/BRL/${codeCurrency}/${inputValue.value}`;
@@ -34,28 +41,26 @@ function toConvert() {
     fetch(url)
         .then(response => response.json())
         .then(data => {
-            if(codeCurrency === "USD"){
+            if (codeCurrency === "USD") {
                 currencyDolar.textContent = `US$ ${data.conversion_result.toFixed(2)}`
-            }else{
+            } else {
                 currencyDolar.textContent = `€ ${data.conversion_result.toFixed(2)}`
-                document.querySelector(".currency-name").textContent = "Euro"
-                document.querySelector(".change-flag").src = "./assets/euro.png"
-                document.querySelector(".change-flag").alt = "flag-euro"
+
             }
             console.log(data.conversion_result.toFixed(2))
         });
 
     toInsrtValueInReal()
     checkCodeCurrency()
-    
+
 }
 
 buttonConverter.addEventListener("click", toConvert)
 
-function toInsrtValueInReal(){
+function toInsrtValueInReal() {
     let stringValue = inputValue.value
     let numberValue = parseFloat(stringValue)
-    document.querySelector(".currency-real").textContent = `R$ ${numberValue.toFixed(2)}`  
+    document.querySelector(".currency-real").textContent = `R$ ${numberValue.toFixed(2)}`
 }
 
 

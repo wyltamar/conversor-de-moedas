@@ -47,7 +47,6 @@ function toConvert() {
                 currencyDolar.textContent = `€ ${data.conversion_result.toFixed(2)}`
 
             }
-            console.log(data.conversion_result.toFixed(2))
         });
 
     toInsrtValueInReal()

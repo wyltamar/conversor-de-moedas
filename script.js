@@ -1,17 +1,3 @@
-// Lógica de programação
-/* 
-
-[X] Captar quando o botão Converter for clicado;
-[x] Criar uma função para mostrar que o botão foi clicado; 
-[X] Pegar o valor em real que será convertido e mostrar no console;
-[X] Fazer a conversão de real para dólar;
-[X] Colocar o valor em real informado pelo usuário no valor de real na tela;
-[X] Colocar no campo dólar o valor convertido;
-[X] Formatar os valores para forma monetária;
-[X] Implementar a conversão para Euro ao trocarmos o select;
-[X] Trocar bandeira ao mudar a moeda estrangeira
-
-*/
 const buttonConverter = document.querySelector("button")
 const inputValue = document.querySelector("input")
 const currencyDolar = document.querySelector(".currency-dolar")
@@ -27,13 +13,19 @@ function checkCodeCurrency() {
         document.querySelector(".currency-name").textContent = "Euro"
         document.querySelector(".change-flag").src = "./assets/euro.png"
         document.querySelector(".change-flag").alt = "flag-euro"
-        document.querySelector(".currency-dolar").textContent = "€ 0.0"
+        document.querySelector(".currency-dolar").textContent = new Intl.NumberFormat("de-DE", {
+            style: "currency",
+            currency: "EUR"
+        }).format(0)
     }else if (codeCurrencyVerify === "dolar") {
         codeCurrency = "USD"
         document.querySelector(".currency-name").textContent = "Dólar"
         document.querySelector(".change-flag").src = "./assets/dolar.png"
         document.querySelector(".change-flag").alt = "flag-dola"
-        document.querySelector(".currency-dolar").textContent = "US$ 0.0"
+        document.querySelector(".currency-dolar").textContent = new Intl.NumberFormat("en-US", {
+            style: "currency",
+            currency: "USD"
+        }).format(0)
     }
 
 }
@@ -49,10 +41,15 @@ function toConvert() {
         .then(response => response.json())
         .then(data => {
             if (codeCurrency === "USD") {
-                currencyDolar.textContent = `US$ ${data.conversion_result.toFixed(2)}`
+                currencyDolar.textContent = new Intl.NumberFormat("en-US", {
+                    style: "currency",
+                    currency: "USD"
+                }).format(data.conversion_result)
             } else if (codeCurrency === "EUR") {
-                currencyDolar.textContent = `€ ${data.conversion_result.toFixed(2)}`
-
+                currencyDolar.textContent = new Intl.NumberFormat("de-DE", {
+                    style: "currency",
+                    currency: "EUR"
+                }).format(data.conversion_result)
             }
         });
 
@@ -66,7 +63,10 @@ buttonConverter.addEventListener("click", toConvert)
 function toInsrtValueInReal() {
     let stringValue = inputValue.value
     let numberValue = parseFloat(stringValue)
-    document.querySelector(".currency-real").textContent = `R$ ${numberValue.toFixed(2)}`
+    document.querySelector(".currency-real").textContent = new Intl.NumberFormat("pt-BR", {
+        style: "currency",
+        currency: "BRL"
+    }).format(numberValue)
 }
 
 

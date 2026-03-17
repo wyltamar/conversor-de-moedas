@@ -59,6 +59,7 @@ select, input{
     font-weight: 700;
     font-size: 16px;
     color: #555555;
+    box-shadow: 1px 1px 1px 0px #B7B021;
 }
 
 button{

@@ -132,6 +132,16 @@ function toConvert() {
                     style: "currency",
                     currency: "BRL"
                 }).format(data.conversion_result)
+            }else if (codeCurrency === "GBP") {
+                currencyDolar.textContent = new Intl.NumberFormat("en-GB", {
+                    style: "currency",
+                    currency: "GBP"
+                }).format(data.conversion_result)
+            }else if (codeCurrency === "JPY") {
+                currencyDolar.textContent = new Intl.NumberFormat("ja-JP", {
+                    style: "currency",
+                    currency: "JPY"
+                }).format(data.conversion_result)
             }
         });
 

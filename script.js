@@ -1,3 +1,12 @@
+// Desafio:
+//[] Adicionar um shadow nas bandeiras das moedas para dar um efeito de profundidade.
+//[] O usuário deve ser capaz de inserir um valor em reais (BRL), euro (EUR) ou dólar (USD) no campo de entrada.
+//[] Ao escolher a moeda para a qual deseja converter (dólar, euro, etc.) a função de conversão deve ser acionada, realizando a conversão do valor inserido para a moeda selecionada.
+//[] O aplicativo deve exibir o valor convertido na moeda selecionada. 
+//[] Adicionar mais duas moedas para conversão, como libra esterlina (GBP) e iene japonês (JPY).
+//[] O aplicativo deve lidar com erros, como entradas inválidas ou falhas na API, exibindo mensagens de erro apropriadas para o usuário.
+//[] O aplicativo deve ser responsivo, adaptando-se a diferentes tamanhos de tela, como desktops, tablets e smartphones.
+
 const buttonConverter = document.querySelector("button")
 const inputValue = document.querySelector("input")
 const currencyDolar = document.querySelector(".currency-dolar")

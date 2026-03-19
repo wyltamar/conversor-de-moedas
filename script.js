@@ -17,6 +17,26 @@ let codeCurrency = "USD"
 const currencyToConvert = document.querySelector(".currency-to-convert")
 let codeCurrencyToConvert = "BRL"
 
+
+
+function disabledButton() {
+    if(selectCurrency.value === currencyToConvert.value ) {
+        buttonConverter.disabled = true
+        buttonConverter.style.cursor = "not-allowed"
+        alert("Por favor selecione moedas diferentes para conversão.")
+
+    } else {
+        buttonConverter.disabled = false
+        buttonConverter.style.cursor = "pointer"
+    }
+
+}
+
+selectCurrency.addEventListener("change", disabledButton)
+currencyToConvert.addEventListener("change", disabledButton)
+
+
+
 function checkCodeCurrencyToConvert() {
 
     if (currencyToConvert.value === "real") {
@@ -67,7 +87,7 @@ function checkCodeCurrency() {
             style: "currency",
             currency: "EUR"
         }).format(0)
-    }else if (codeCurrencyVerify === "dolar") {
+    } else if (codeCurrencyVerify === "dolar") {
         codeCurrency = "USD"
         document.querySelector(".currency-name").textContent = "Dólar"
         document.querySelector(".change-flag").src = "./assets/dolar.png"
@@ -76,7 +96,7 @@ function checkCodeCurrency() {
             style: "currency",
             currency: "USD"
         }).format(0)
-    }else if (codeCurrencyVerify === "real") {
+    } else if (codeCurrencyVerify === "real") {
         codeCurrency = "BRL"
         document.querySelector(".currency-name").textContent = "Real"
         document.querySelector(".change-flag").src = "./assets/real.png"
@@ -85,7 +105,7 @@ function checkCodeCurrency() {
             style: "currency",
             currency: "BRL"
         }).format(0)
-    }else if (codeCurrencyVerify === "libra") {
+    } else if (codeCurrencyVerify === "libra") {
         codeCurrency = "GBP"
         document.querySelector(".currency-name").textContent = "Libra Esterlina"
         document.querySelector(".change-flag").src = "./assets/libra.png"
@@ -94,7 +114,7 @@ function checkCodeCurrency() {
             style: "currency",
             currency: "GBP"
         }).format(0)
-    }else if (codeCurrencyVerify === "iene") {
+    } else if (codeCurrencyVerify === "iene") {
         codeCurrency = "JPY"
         document.querySelector(".currency-name").textContent = "Iene Japonês"
         document.querySelector(".change-flag").src = "./assets/iene.png"
@@ -111,6 +131,18 @@ selectCurrency.addEventListener("change", checkCodeCurrency);
 
 function toConvert() {
 
+    try {
+
+        if (inputValue.value === "" || isNaN(inputValue.value)) {
+
+            throw new Error("Valor inválido. Por favor, insira um número válido.")
+            
+        }
+
+    } catch (error) {
+        alert(error.message)
+    }
+
     const url = `https://api.frankfurter.dev/v1/latest?base=${codeCurrencyToConvert}&symbols=${codeCurrency}`;
 
     fetch(url)
@@ -120,35 +152,36 @@ function toConvert() {
             const convertedAmount = data.rates[codeCurrency] * parseFloat(inputValue.value);
 
             if (codeCurrency === "USD") {
-            currencyDolar.textContent = new Intl.NumberFormat("en-US", {
-                style: "currency",
-                currency: codeCurrency
-            }).format(convertedAmount)
+                currencyDolar.textContent = new Intl.NumberFormat("en-US", {
+                    style: "currency",
+                    currency: codeCurrency
+                }).format(convertedAmount)
             } else if (codeCurrency === "EUR") {
                 currencyDolar.textContent = new Intl.NumberFormat("de-DE", {
                     style: "currency",
                     currency: codeCurrency
                 }).format(convertedAmount)
-            }else if (codeCurrency === "BRL") {
+            } else if (codeCurrency === "BRL") {
                 currencyDolar.textContent = new Intl.NumberFormat("pt-BR", {
                     style: "currency",
                     currency: "BRL"
                 }).format(convertedAmount)
-            }else if (codeCurrency === "GBP") {
+            } else if (codeCurrency === "GBP") {
                 currencyDolar.textContent = new Intl.NumberFormat("en-GB", {
                     style: "currency",
                     currency: "GBP"
                 }).format(convertedAmount)
-            }else if (codeCurrency === "JPY") {
+            } else if (codeCurrency === "JPY") {
                 currencyDolar.textContent = new Intl.NumberFormat("ja-JP", {
                     style: "currency",
                     currency: "JPY"
                 }).format(convertedAmount)
             }
 
-            console.log(data.rates);
-            
-        });
+        }).catch(error => {
+            alert("Ocorreu um erro ao obter as taxas de câmbio. Por favor, tente novamente mais tarde.")
+            console.error("Erro na API:", error)
+        })
 
     toInsrtValueInReal()
     checkCodeCurrency()

@@ -111,38 +111,43 @@ selectCurrency.addEventListener("change", checkCodeCurrency);
 
 function toConvert() {
 
-    const API_KEY = "e0336a24fd5b3577e2ddf631"
-    const url = `https://v6.exchangerate-api.com/v6/${API_KEY}/pair/${codeCurrencyToConvert}/${codeCurrency}/${inputValue.value}`;
+    const url = `https://api.frankfurter.dev/v1/latest?base=${codeCurrencyToConvert}&symbols=${codeCurrency}`;
 
     fetch(url)
         .then(response => response.json())
         .then(data => {
+
+            const convertedAmount = data.rates[codeCurrency] * parseFloat(inputValue.value);
+
             if (codeCurrency === "USD") {
-                currencyDolar.textContent = new Intl.NumberFormat("en-US", {
-                    style: "currency",
-                    currency: "USD"
-                }).format(data.conversion_result)
+            currencyDolar.textContent = new Intl.NumberFormat("en-US", {
+                style: "currency",
+                currency: codeCurrency
+            }).format(convertedAmount)
             } else if (codeCurrency === "EUR") {
                 currencyDolar.textContent = new Intl.NumberFormat("de-DE", {
                     style: "currency",
-                    currency: "EUR"
-                }).format(data.conversion_result)
+                    currency: codeCurrency
+                }).format(convertedAmount)
             }else if (codeCurrency === "BRL") {
                 currencyDolar.textContent = new Intl.NumberFormat("pt-BR", {
                     style: "currency",
                     currency: "BRL"
-                }).format(data.conversion_result)
+                }).format(convertedAmount)
             }else if (codeCurrency === "GBP") {
                 currencyDolar.textContent = new Intl.NumberFormat("en-GB", {
                     style: "currency",
                     currency: "GBP"
-                }).format(data.conversion_result)
+                }).format(convertedAmount)
             }else if (codeCurrency === "JPY") {
                 currencyDolar.textContent = new Intl.NumberFormat("ja-JP", {
                     style: "currency",
                     currency: "JPY"
-                }).format(data.conversion_result)
+                }).format(convertedAmount)
             }
+
+            console.log(data.rates);
+            
         });
 
     toInsrtValueInReal()

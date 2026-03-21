@@ -1,14 +1,3 @@
-// Desafio:
-//[X] Adicionar um shadow nos inputs e selects para dar um efeito de profundidade.
-//[X] O usuário deve ser capaz de inserir um valor em reais (BRL), euro (EUR) ou dólar (USD) no campo de entrada.
-//[X] O aplicativo deve trocar a bandeira,o nome da moeda e o valor de acordo com a moeda selecionada para conversão.
-//[X] Ao escolher a moeda para a qual deseja converter (dólar, euro, etc.) e obotao de converter for
-//    clicado a função de conversão deve ser acionada, realizando a conversão do valor inserido para a moeda selecionada.
-//[X] O aplicativo deve exibir o valor convertido na moeda selecionada. 
-//[X] Adicionar mais duas moedas para conversão, como libra esterlina (GBP) e iene japonês (JPY).
-//[] O aplicativo deve lidar com erros, como entradas inválidas ou falhas na API, exibindo mensagens de erro apropriadas para o usuário.
-//[] O aplicativo deve ser responsivo, adaptando-se a diferentes tamanhos de tela, como desktops, tablets e smartphones.
-
 const buttonConverter = document.querySelector("button")
 const inputValue = document.querySelector("input")
 const currencyDolar = document.querySelector(".currency-dolar")
@@ -18,7 +7,7 @@ const currencyToConvert = document.querySelector(".currency-to-convert")
 let codeCurrencyToConvert = "BRL"
 
 
-
+// Função para desabilitar o botão de conversão quando as moedas selecionadas forem iguais  
 function disabledButton() {
     if(selectCurrency.value === currencyToConvert.value ) {
         buttonConverter.disabled = true
@@ -32,11 +21,14 @@ function disabledButton() {
 
 }
 
-selectCurrency.addEventListener("change", disabledButton)
+// Adicionando o evento de mudança para os selects de moeda para verificar se as moedas selecionadas são iguais e desabilitar o botão de conversão se necessário
+selectCurrency.addEventListener("change", disabledButton) 
+
+// Adicionando o evento de mudança para o select de moeda a ser convertida para verificar se as moedas selecionadas são iguais e desabilitar o botão de conversão se necessário
 currencyToConvert.addEventListener("change", disabledButton)
 
 
-
+// Função para verificar o código da moeda a ser convertida e atualizar a bandeira, nome da moeda e valor de acordo com a moeda selecionada
 function checkCodeCurrencyToConvert() {
 
     if (currencyToConvert.value === "real") {
@@ -71,9 +63,10 @@ function checkCodeCurrencyToConvert() {
 
 }
 
+// Adicionando o evento de mudança para o select de moeda a ser convertida para verificar o código da moeda e atualizar a bandeira, nome da moeda e valor de acordo com a moeda selecionada
 currencyToConvert.addEventListener("change", checkCodeCurrencyToConvert)
 
-
+// Função para verificar o código da moeda selecionada para conversão e atualizar a bandeira, nome da moeda e valor de acordo com a moeda selecionada
 function checkCodeCurrency() {
     const select = document.querySelector(".select-currency")
     const codeCurrencyVerify = select.value
@@ -127,8 +120,10 @@ function checkCodeCurrency() {
 
 }
 
+// 
 selectCurrency.addEventListener("change", checkCodeCurrency);
 
+//
 function toConvert() {
 
     try {
@@ -188,8 +183,10 @@ function toConvert() {
 
 }
 
+// Adicionando o evento de clique para o botão de conversão para acionar a função de conversão
 buttonConverter.addEventListener("click", toConvert)
 
+// Função para inserir o valor em reais
 function toInsrtValueInReal() {
     let stringValue = inputValue.value
     let numberValue = parseFloat(stringValue)
